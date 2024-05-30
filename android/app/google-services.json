@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "687252436546",
+    "project_id": "my-store-freelancer",
+    "storage_bucket": "my-store-freelancer.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:687252436546:android:1bc7c411bf82d551cf5fdb",
+        "android_client_info": {
+          "package_name": "com.example.my_store"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyASzpGqPX1--D_LM-J2wHw-_y0u6a2G_u0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
