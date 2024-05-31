@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get_it/get_it.dart';
+import 'package:my_store/src/modules/product/controller/product_controller.dart';
+import 'package:my_store/src/modules/product/view/bloc/product_bloc.dart';
 import 'package:my_store/src/modules/user/controller/user_controller.dart';
 import 'package:my_store/src/modules/user/view/bloc/user_bloc.dart';
 
@@ -12,6 +14,7 @@ Future<void> setupDependencyAssembly() async {
     ..registerLazySingleton<FirebaseAuth>(() => FirebaseAuth.instance);
 
   _setupUser();
+  _setupProduct();
 }
 
 Future<void> _setupUser() async {
@@ -27,5 +30,19 @@ Future<void> _setupUser() async {
       () => UserController(
           firebaseAuth: dependencyAssembly(),
           firebaseFirestore: dependencyAssembly()),
+    );
+}
+
+Future<void> _setupProduct() async {
+  dependencyAssembly
+
+    // Bloc
+    ..registerFactory<ProductBloc>(
+      () => ProductBloc(dependencyAssembly()),
+    )
+
+    // Use Cases
+    ..registerLazySingleton<ProductController>(
+      () => ProductController(firebaseFirestore: dependencyAssembly()),
     );
 }

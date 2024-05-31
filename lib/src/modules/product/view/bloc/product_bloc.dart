@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:my_store/src/core/extensions/parser_extension_object.dart';
 import 'package:my_store/src/modules/product/controller/product_controller.dart';
 import 'package:my_store/src/modules/product/model/product_model.dart';
 import 'package:my_store/src/modules/product/view/bloc/product_state.dart';
@@ -89,11 +90,13 @@ class ProductBloc extends Cubit<ProductState> {
     }
   }
 
-  Future<void> get(String id) async {
+  Future<void> get(String? id) async {
     try {
       emit(state.copyWith(statusForm: ProductFormStatus.loading));
 
-      await controller.get(id);
+      if (!id.isNull()) {
+        await controller.get(id!);
+      }
 
       emit(
         state.copyWith(
@@ -108,5 +111,70 @@ class ProductBloc extends Cubit<ProductState> {
         ),
       );
     }
+  }
+
+  Future<void> setTitle(String? value) async {
+    return emit(
+      state.copyWith(
+        hasChanged: true,
+        title: value,
+        description: state.description,
+        price: state.price,
+        typeProduct: state.typeProduct,
+        url: state.url,
+      ),
+    );
+  }
+
+  Future<void> setDescription(String? value) async {
+    return emit(
+      state.copyWith(
+        hasChanged: true,
+        title: state.title,
+        description: value,
+        price: state.price,
+        typeProduct: state.typeProduct,
+        url: state.url,
+      ),
+    );
+  }
+
+  Future<void> setPrice(String? value) async {
+    return emit(
+      state.copyWith(
+        hasChanged: true,
+        title: state.title,
+        description: state.description,
+        price: value,
+        typeProduct: state.typeProduct,
+        url: state.url,
+      ),
+    );
+  }
+
+  Future<void> setTypeProduct(String? value) async {
+    return emit(
+      state.copyWith(
+        hasChanged: true,
+        title: state.title,
+        description: state.description,
+        price: state.price,
+        typeProduct: value,
+        url: '',
+      ),
+    );
+  }
+
+  Future<void> setImage(String? value) async {
+    return emit(
+      state.copyWith(
+        hasChanged: true,
+        title: state.title,
+        description: state.description,
+        price: state.price,
+        typeProduct: state.typeProduct,
+        url: value,
+      ),
+    );
   }
 }

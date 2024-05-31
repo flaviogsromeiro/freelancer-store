@@ -47,11 +47,11 @@ class _AppObservationFieldState extends State<AppObservationField> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(
-        bottom: Utils.heightSize(context) * 0.025,
-        top: Utils.heightSize(context) * 0.01,
-      ),
+    return SizedBox(
+      // margin: EdgeInsets.only(
+      //   bottom: Utils.heightSize(context) * 0.025,
+      //   top: Utils.heightSize(context) * 0.01,
+      // ),
       height: Utils.widthSize(context) * 0.25,
       width: double.infinity,
       child: TextFormField(
@@ -75,7 +75,7 @@ class _AppObservationFieldState extends State<AppObservationField> {
           labelStyle: TextStyle(
             color: _isFocus ? Styles.primary : null,
           ),
-          labelText: 'Observação',
+          labelText: 'Descrição',
           contentPadding: const EdgeInsets.all(15),
           focusedBorder: OutlineInputBorder(
             borderSide: BorderSide(

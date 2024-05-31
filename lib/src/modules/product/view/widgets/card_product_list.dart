@@ -51,7 +51,7 @@ class CardProductList extends StatelessWidget {
                   style: const TextStyle(fontWeight: FontWeight.w500),
                 ),
                 Text(
-                  model.preco.toStringAsFixed(2),
+                  model.preco,
                   style: TextStyle(
                       color: Theme.of(context).primaryColor,
                       fontSize: 17.0,

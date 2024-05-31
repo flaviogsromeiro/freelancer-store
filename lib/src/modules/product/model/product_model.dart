@@ -7,7 +7,7 @@ class ProductModel {
   final String descricao;
   final String tamanho;
   final String urlImagem;
-  final double preco;
+  final String preco;
 
   ProductModel({
     this.id,
@@ -23,7 +23,7 @@ class ProductModel {
         descricao: '',
         tamanho: '',
         urlImagem: '',
-        preco: 0.0,
+        preco: '',
       );
 
   Map<String, dynamic> toMap() {
@@ -44,7 +44,7 @@ class ProductModel {
       descricao: map['descricao'] as String,
       tamanho: map['tamanho'] as String,
       urlImagem: map['urlImagem'] as String,
-      preco: map['preco'] as double,
+      preco: map['preco'] as String,
     );
   }
 

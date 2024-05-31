@@ -2,7 +2,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:my_store/src/utils/style/styles.dart';
-import 'package:my_store/src/utils/utils.dart';
 
 class AppTextFormField extends StatefulWidget {
   const AppTextFormField({
@@ -97,62 +96,59 @@ class _AppTextFormFieldState extends State<AppTextFormField> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(vertical: Utils.heightSize(context) * 0.01),
-      child: TextFormField(
-        textCapitalization: TextCapitalization.sentences,
-        scrollPadding: const EdgeInsets.only(bottom: 200),
-        enabled: widget.enable ?? true,
-        keyboardType: widget.textInputType,
-        cursorColor: Styles.primary,
-        readOnly: widget.onlyRead ?? false,
-        maxLength: widget.characterLimit,
-        autovalidateMode: AutovalidateMode.onUserInteraction,
-        focusNode: _focusNode,
-        inputFormatters: widget.inputFormatters,
-        controller: _controller,
-        validator: widget.onValidator,
-        decoration: InputDecoration(
-          hintText: widget.hintText,
-          errorStyle: const TextStyle(fontSize: 12, height: 0.3),
-          border: const OutlineInputBorder(
-            borderRadius: BorderRadius.all(Radius.circular(20)),
-          ),
-          filled: true,
-          fillColor: Colors.transparent,
-          counterText: '',
-          labelStyle: TextStyle(
-            color: _isFocus ? Styles.primary : null,
-          ),
-          hintStyle: const TextStyle(
-            color: Colors.grey,
-            fontWeight: FontWeight.normal,
-          ),
-          labelText: widget.label,
-          contentPadding: const EdgeInsets.all(15),
-          focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(
-              color: _isFocus ? Styles.primary : Colors.grey,
-              width: 2,
-            ),
-            borderRadius: const BorderRadius.all(Radius.circular(20)),
-          ),
-          errorBorder: const OutlineInputBorder(
-            borderSide: BorderSide(
-              color: Colors.red,
-            ),
-            gapPadding: 25,
-            borderRadius: BorderRadius.all(Radius.circular(20)),
-          ),
-          enabledBorder: const OutlineInputBorder(
-            borderSide: BorderSide(
-              color: Colors.grey,
-            ),
-            borderRadius: BorderRadius.all(Radius.circular(20)),
-          ),
-          isDense: true,
-          errorMaxLines: 2,
+    return TextFormField(
+      textCapitalization: TextCapitalization.sentences,
+      scrollPadding: const EdgeInsets.only(bottom: 200),
+      enabled: widget.enable ?? true,
+      keyboardType: widget.textInputType,
+      cursorColor: Styles.primary,
+      readOnly: widget.onlyRead ?? false,
+      maxLength: widget.characterLimit,
+      autovalidateMode: AutovalidateMode.onUserInteraction,
+      focusNode: _focusNode,
+      inputFormatters: widget.inputFormatters,
+      controller: _controller,
+      validator: widget.onValidator,
+      decoration: InputDecoration(
+        hintText: widget.hintText,
+        errorStyle: const TextStyle(fontSize: 12, height: 0.3),
+        border: const OutlineInputBorder(
+          borderRadius: BorderRadius.all(Radius.circular(20)),
         ),
+        filled: true,
+        fillColor: Colors.transparent,
+        counterText: '',
+        labelStyle: TextStyle(
+          color: _isFocus ? Styles.primary : null,
+        ),
+        hintStyle: const TextStyle(
+          color: Colors.grey,
+          fontWeight: FontWeight.normal,
+        ),
+        labelText: widget.label,
+        contentPadding: const EdgeInsets.all(15),
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: _isFocus ? Styles.primary : Colors.grey,
+            width: 2,
+          ),
+          borderRadius: const BorderRadius.all(Radius.circular(20)),
+        ),
+        errorBorder: const OutlineInputBorder(
+          borderSide: BorderSide(
+            color: Colors.red,
+          ),
+          gapPadding: 25,
+          borderRadius: BorderRadius.all(Radius.circular(20)),
+        ),
+        enabledBorder: const OutlineInputBorder(
+          borderSide: BorderSide(
+            color: Colors.grey,
+          ),
+          borderRadius: BorderRadius.all(Radius.circular(20)),
+        ),
+        isDense: true,
+        errorMaxLines: 2,
       ),
     );
   }
