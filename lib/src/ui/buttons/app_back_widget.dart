@@ -21,11 +21,7 @@ class AppBackWidget extends StatelessWidget {
       ),
       decoration: BoxDecoration(
         shape: BoxShape.circle,
-<<<<<<< HEAD
         color: Styles.primary,
-=======
-        color: Styles.primatySecondary,
->>>>>>> 1db866af64af248d274dabceb92a1877ec081436
       ),
       child: Center(
         child: IconButton(
@@ -43,11 +39,7 @@ class AppBackWidget extends StatelessWidget {
           },
           icon: Icon(
             FontAwesomeIcons.arrowLeft,
-<<<<<<< HEAD
             color: Styles.tertiary,
-=======
-            color: Styles.primary,
->>>>>>> 1db866af64af248d274dabceb92a1877ec081436
             size: 20,
           ),
         ),

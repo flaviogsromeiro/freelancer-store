@@ -1,9 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-<<<<<<< HEAD
 import 'dart:developer';
 
-=======
->>>>>>> 1db866af64af248d274dabceb92a1877ec081436
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:my_store/src/modules/user/model/auth_model.dart';
@@ -20,19 +17,12 @@ class UserController {
 
   Future<bool> signIn(AuthModel model) async {
     try {
-<<<<<<< HEAD
       final result = await firebaseAuth.signInWithEmailAndPassword(
-=======
-      await firebaseAuth.createUserWithEmailAndPassword(
->>>>>>> 1db866af64af248d274dabceb92a1877ec081436
           email: model.email, password: model.senha);
 
       return true;
     } catch (e) {
-<<<<<<< HEAD
       log('$e');
-=======
->>>>>>> 1db866af64af248d274dabceb92a1877ec081436
       return false;
     }
   }
