@@ -1,6 +1,9 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+<<<<<<< HEAD
 import 'package:flutter/services.dart';
+=======
+>>>>>>> 1db866af64af248d274dabceb92a1877ec081436
 import 'package:my_store/src/core/mixin/form_field_mixin.dart';
 import 'package:my_store/src/utils/style/styles.dart';
 
@@ -14,8 +17,11 @@ class AppTextFieldWidget extends StatefulWidget {
     this.prefixIcon,
     this.suffixAction,
     this.onChanged,
+<<<<<<< HEAD
     this.inputFormatters,
     this.textInputType,
+=======
+>>>>>>> 1db866af64af248d274dabceb92a1877ec081436
     this.isShowIconPassword = false,
     super.key,
   });
@@ -29,8 +35,11 @@ class AppTextFieldWidget extends StatefulWidget {
   final String? Function(String?) validator;
   void Function(String?)? onChanged;
   final TextEditingController controller;
+<<<<<<< HEAD
   final List<TextInputFormatter>? inputFormatters;
   final TextInputType? textInputType;
+=======
+>>>>>>> 1db866af64af248d274dabceb92a1877ec081436
 
   @override
   State<AppTextFieldWidget> createState() => _AppTextFieldWidgetState();
@@ -65,9 +74,12 @@ class _AppTextFieldWidgetState extends State<AppTextFieldWidget>
           ),
         ),
         TextFormField(
+<<<<<<< HEAD
           inputFormatters: widget.inputFormatters,
           textCapitalization: TextCapitalization.sentences,
           keyboardType: widget.textInputType,
+=======
+>>>>>>> 1db866af64af248d274dabceb92a1877ec081436
           cursorColor: Styles.primary,
           autovalidateMode: AutovalidateMode.onUserInteraction,
           focusNode: focusNode,

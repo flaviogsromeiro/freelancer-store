@@ -36,7 +36,11 @@ class Dialogs {
       context: context,
       barrierDismissible: false,
       builder: (context) {
+<<<<<<< HEAD
         Future.delayed(const Duration(seconds: 3), () {
+=======
+        Future.delayed(const Duration(seconds: 1), () {
+>>>>>>> 1db866af64af248d274dabceb92a1877ec081436
           Navigator.of(context).pop();
         });
         return AppSimpleMessageDialog(

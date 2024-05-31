@@ -33,9 +33,13 @@ class UserBloc extends Cubit<UserState> {
     final isSignUp = await authController.signUp(model, password);
 
     if (isSignUp) {
+<<<<<<< HEAD
       emit(state.copyWith(
           status: UserStatus.success,
           message: 'Cadastro realizado com sucesso'));
+=======
+      emit(state.copyWith(status: UserStatus.success));
+>>>>>>> 1db866af64af248d274dabceb92a1877ec081436
     } else {
       emit(state.copyWith(
         status: UserStatus.error,

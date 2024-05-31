@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_store/src/modules/user/model/auth_model.dart';
 import 'package:my_store/src/modules/user/view/bloc/user_bloc.dart';
 import 'package:my_store/src/modules/user/view/bloc/user_state.dart';
+<<<<<<< HEAD
 import 'package:my_store/src/modules/user/view/pages/signup_screen.dart';
 import 'package:my_store/src/modules/user/view/widgets/login_banner_widget.dart';
 import 'package:my_store/src/modules/user/view/widgets/login_title_widget.dart';
@@ -12,6 +13,13 @@ import 'package:my_store/src/ui/buttons/app_button_widget.dart';
 import 'package:my_store/src/ui/dialogs/dialogs.dart';
 import 'package:my_store/src/ui/form/app_text_field_widget.dart';
 import 'package:my_store/src/ui/text/app_text_version.dart';
+=======
+import 'package:my_store/src/modules/user/view/widgets/login_banner_widget.dart';
+import 'package:my_store/src/modules/user/view/widgets/login_button_widget.dart';
+import 'package:my_store/src/modules/user/view/widgets/login_title_widget.dart';
+import 'package:my_store/src/ui/dialogs/dialogs.dart';
+import 'package:my_store/src/ui/form/app_text_field_widget.dart';
+>>>>>>> 1db866af64af248d274dabceb92a1877ec081436
 import 'package:my_store/src/utils/validator.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -78,7 +86,11 @@ class _LoginScreenState extends State<LoginScreen> {
                               left: 12,
                               right: 12,
                             ),
+<<<<<<< HEAD
                             height: 250,
+=======
+                            height: 300,
+>>>>>>> 1db866af64af248d274dabceb92a1877ec081436
                             child: Column(
                               children: [
                                 AppTextFieldWidget(
@@ -106,9 +118,13 @@ class _LoginScreenState extends State<LoginScreen> {
                               ],
                             ),
                           ),
+<<<<<<< HEAD
                           AppButtonWidget(
                             titleButton: 'Entrar',
                             isLoading: state.status == UserStatus.loading,
+=======
+                          LoginButtonWidget(
+>>>>>>> 1db866af64af248d274dabceb92a1877ec081436
                             onPressed: () {
                               if (_formKey.currentState!.validate()) {
                                 bloc.signIn(
@@ -119,6 +135,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 );
                               }
                             },
+<<<<<<< HEAD
                           ),
                           const SizedBox(
                             height: 10,
@@ -134,6 +151,10 @@ class _LoginScreenState extends State<LoginScreen> {
                             height: 20,
                           ),
                           const AppTextVersion(),
+=======
+                            isLoading: state.status == UserStatus.loading,
+                          ),
+>>>>>>> 1db866af64af248d274dabceb92a1877ec081436
                         ],
                       ),
                     ),
