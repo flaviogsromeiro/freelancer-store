@@ -17,6 +17,9 @@ class CardProductList extends StatelessWidget {
     return Container(
       height: Utils.heightSize(context) * 0.3,
       width: Utils.widthSize(context) * 0.45,
+      margin: EdgeInsets.symmetric(
+          vertical: Utils.heightSize(context) * 0.015,
+          horizontal: Utils.widthSize(context) * 0.02),
       decoration: BoxDecoration(
         color: Styles.tertiary,
         border: Border.all(color: Styles.primary),

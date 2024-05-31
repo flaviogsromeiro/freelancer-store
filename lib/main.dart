@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_store/src/core/di/dependency_assembly.dart' as di;
 import 'package:my_store/src/ini/firebase_options.dart';
+import 'package:my_store/src/modules/home/view/pages/home_screen.dart';
 import 'package:my_store/src/modules/product/view/bloc/product_bloc.dart';
-import 'package:my_store/src/modules/product/view/pages/product_form_screen.dart';
 import 'package:my_store/src/modules/user/view/bloc/user_bloc.dart';
 
 void main() async {
@@ -38,7 +38,7 @@ class MyApp extends StatelessWidget {
             primarySwatch: Colors.blue,
             primaryColor: const Color.fromARGB(255, 4, 125, 141)),
         debugShowCheckedModeBanner: false,
-        home: const ProductFormScreen(),
+        home: const HomeScreen(),
       ),
     );
   }
