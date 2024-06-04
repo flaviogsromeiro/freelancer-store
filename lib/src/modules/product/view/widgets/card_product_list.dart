@@ -41,7 +41,7 @@ class CardProductList extends StatelessWidget {
             child: ClipRRect(
               borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(20), topRight: Radius.circular(20)),
-              child: Image.network(fit: BoxFit.cover, model.urlImagem),
+              child: Image.network(fit: BoxFit.cover, model.urlImage),
             ),
           ),
           Padding(
@@ -50,11 +50,11 @@ class CardProductList extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  model.titulo,
+                  model.title,
                   style: const TextStyle(fontWeight: FontWeight.w500),
                 ),
                 Text(
-                  model.preco,
+                  model.price,
                   style: TextStyle(
                       color: Theme.of(context).primaryColor,
                       fontSize: 17.0,

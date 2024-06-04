@@ -1,49 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:my_store/src/core/di/dependency_assembly.dart' as di;
+import 'package:my_store/src/modules/product/view/bloc/list/product_bloc.dart';
+import 'package:my_store/src/modules/product/view/pages/products_list_screen.dart';
 
-class App extends StatefulWidget {
-  const App({super.key, required this.title});
-
-  final String title;
-
-  @override
-  State<App> createState() => _AppState();
-}
-
-class _AppState extends State<App> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
+class App extends StatelessWidget {
+  const App({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (_) => di.dependencyAssembly<ProductBloc>(),
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      ],
+      child: MaterialApp(
+          theme: ThemeData(
+              primarySwatch: Colors.blue,
+              primaryColor: const Color.fromARGB(255, 4, 125, 141)),
+          debugShowCheckedModeBanner: false,
+          // home:  ProductScreen(product: ProductModel(titulo: '', descricao: '', tamanho: '', urlImagem: '', preco: ''),),
+          home: const ProductsListScreen()),
     );
   }
 }

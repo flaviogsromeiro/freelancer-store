@@ -1,55 +1,48 @@
-import 'dart:convert';
-
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 class ProductModel {
   final String? id;
-  final String titulo;
-  final String descricao;
-  final String tamanho;
-  final String urlImagem;
-  final String preco;
+  final String title;
+  final String description;
+  final String type;
+  final String urlImage;
+  final String price;
 
   ProductModel({
     this.id,
-    required this.titulo,
-    required this.descricao,
-    required this.tamanho,
-    required this.urlImagem,
-    required this.preco,
+    required this.title,
+    required this.description,
+    required this.type,
+    required this.urlImage,
+    required this.price,
   });
 
   factory ProductModel.instance() => ProductModel(
-        titulo: '',
-        descricao: '',
-        tamanho: '',
-        urlImagem: '',
-        preco: '',
+        title: '',
+        description: '',
+        type: '',
+        urlImage: '',
+        price: '',
       );
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      'id': id,
-      'titulo': titulo,
-      'descricao': descricao,
-      'tamanho': tamanho,
-      'urlImagem': urlImagem,
-      'preco': preco,
+      'ID': id,
+      'TITLE': title,
+      'DESCRIPTION': description,
+      'TYPE': type,
+      'URLIMAGE': urlImage,
+      'PRICE': price,
     };
   }
 
   factory ProductModel.fromMap(Map<String, dynamic> map) {
     return ProductModel(
-      id: map['id'] != null ? map['id'] as String : null,
-      titulo: map['titulo'] as String,
-      descricao: map['descricao'] as String,
-      tamanho: map['tamanho'] as String,
-      urlImagem: map['urlImagem'] as String,
-      preco: map['preco'] as String,
+      id: map['ID'] != null ? map['ID'] as String : null,
+      title: map['TITLE'] as String,
+      description: map['DESCRIPTION'] as String,
+      type: map['TYPE'] as String,
+      urlImage: map['URLIMAGE'] as String,
+      price: map['PRICE'] as String,
     );
   }
-
-  String toJson() => json.encode(toMap());
-
-  factory ProductModel.fromJson(String source) =>
-      ProductModel.fromMap(json.decode(source) as Map<String, dynamic>);
 }

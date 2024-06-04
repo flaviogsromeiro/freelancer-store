@@ -7,8 +7,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:my_store/src/core/extensions/parser_extension_object.dart';
 import 'package:my_store/src/modules/product/model/product_model.dart';
-import 'package:my_store/src/modules/product/view/bloc/product_bloc.dart';
-import 'package:my_store/src/modules/product/view/bloc/product_state.dart';
+import 'package:my_store/src/modules/product/view/bloc/form/product_form_bloc.dart';
+import 'package:my_store/src/modules/product/view/bloc/form/product_form_state.dart';
 import 'package:my_store/src/modules/product/view/pages/image_product_screen.dart';
 import 'package:my_store/src/ui/appBar/appbar_simple.dart';
 import 'package:my_store/src/ui/buttons/app_button_widget.dart';
@@ -36,26 +36,37 @@ class ProductFormScreen extends StatefulWidget {
 
 class _ProductFormScreenState extends State<ProductFormScreen> {
   final _formKey = GlobalKey<FormState>();
+  late final ProductFormBloc bloc;
   String? imagePath;
   // imagePath = null;
 
   @override
-  Widget build(BuildContext context) {
-    final bloc = BlocProvider.of<ProductBloc>(context);
+  void initState() {
+    bloc = context.read<ProductFormBloc>();
+    bloc.get(widget.id);
+    super.initState();
+  }
 
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBarSimple(
         title: 'Criar Produto',
         // isPop: state.hasChanged,
       ),
-      body: BlocConsumer<ProductBloc, ProductState>(
-        bloc: bloc..get(widget.id),
+      body: BlocConsumer<ProductFormBloc, ProductFormState>(
+        bloc: bloc,
         listener: (context, state) {
-          // TODO: implement listener
+          if (state.status == ProductFormStatus.created) {
+            Dialogs.showModalSuccessMessage(context, message: state.message!)
+                .then((value) {
+              Navigator.pop(context);
+            });
+          }
         },
         builder: (context, state) {
-          if (state.statusForm == ProductFormStatus.initial ||
-              state.statusForm == ProductFormStatus.loading) {
+          if (state.status == ProductFormStatus.initial ||
+              state.status == ProductFormStatus.loading) {
             return const Center(
               child: CircularProgressIndicator(),
             );
@@ -125,6 +136,7 @@ class _ProductFormScreenState extends State<ProductFormScreen> {
                               textInputType: TextInputType.number,
                               enable: true,
                               onlyRead: false,
+                              text: state.price,
                               inputFormatters: [
                                 FilteringTextInputFormatter.digitsOnly,
                                 CentavosInputFormatter(moeda: true),
@@ -235,21 +247,21 @@ class _ProductFormScreenState extends State<ProductFormScreen> {
                       if (widget.id.isNull()) {
                         bloc.create(
                           ProductModel(
-                            titulo: state.title!,
-                            descricao: state.description!,
-                            tamanho: '',
-                            urlImagem: state.url!,
-                            preco: state.price!,
+                            title: state.title!,
+                            description: state.description!,
+                            type: '',
+                            urlImage: state.url!,
+                            price: state.price!,
                           ),
                         );
                       } else {
                         bloc.update(
                           ProductModel(
-                            titulo: state.title!,
-                            descricao: state.description!,
-                            tamanho: '',
-                            urlImagem: state.url!,
-                            preco: state.price!,
+                            title: state.title!,
+                            description: state.description!,
+                            type: '',
+                            urlImage: state.url!,
+                            price: state.price!,
                           ),
                         );
                       }
@@ -261,7 +273,7 @@ class _ProductFormScreenState extends State<ProductFormScreen> {
                       );
                     }
                   },
-                  isLoading: state.statusForm == ProductFormStatus.loading,
+                  isLoading: state.status == ProductFormStatus.loading,
                 ),
               ),
             ],

@@ -1,17 +1,17 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:my_store/src/core/database/database_service.dart';
 import 'package:my_store/src/modules/product/model/product_model.dart';
 
 class ProductController {
-  final FirebaseFirestore firebaseFirestore;
+  final DatabaseService databaseService;
 
   ProductController({
-    required this.firebaseFirestore,
+    required this.databaseService,
   });
 
   Future<bool> delete(String id) async {
     try {
-      await firebaseFirestore.collection('Products').doc(id).delete();
+      await databaseService.delete(
+          tableName: 'PRODUCTS', whereParams: 'ID = ?', whereValues: [id]);
 
       return true;
     } catch (e) {
@@ -20,56 +20,35 @@ class ProductController {
   }
 
   Future<List<ProductModel>> getAll() async {
-    List<Map<String, dynamic>> documentsData = [];
-
     try {
-      QuerySnapshot<Map<String, dynamic>> products =
-          await FirebaseFirestore.instance.collection('Products').get();
+      final result = await databaseService
+          .list(tableName: 'PRODUCTS',);
 
-      for (var element in products.docs) {
-        var item = element.data();
-
-        item['id'] = element.id;
-
-        documentsData.add(
-          item,
-        );
-      }
-
-      return [];
+      return List.from(result as List)
+          .map<ProductModel>(
+            (e) => ProductModel.fromMap(e as Map<String, dynamic>),
+          )
+          .toList();
     } catch (e) {
       return [];
     }
   }
-  Future<ProductModel> get(String id) async {
-    List<Map<String, dynamic>> documentsData = [];
 
+  Future<ProductModel?> get(String id) async {
     try {
-      QuerySnapshot<Map<String, dynamic>> products =
-          await FirebaseFirestore.instance.collection('Products').get();
+      final result = await databaseService.find(
+          tableName: 'PRODUCTS', whereParams: 'ID = ? ', whereValues: [id]);
 
-      for (var element in products.docs) {
-        var item = element.data();
-
-        item['id'] = element.id;
-
-        documentsData.add(
-          item,
-        );
-      }
-
-      return ProductModel.instance();
+      return ProductModel.fromMap(result as Map<String, dynamic>);
     } catch (e) {
-      return ProductModel.instance();
+      return null;
     }
   }
 
   Future<bool> post(ProductModel model) async {
     try {
-      CollectionReference query =
-          FirebaseFirestore.instance.collection('Products');
-
-      await query.add(model.toMap());
+      await databaseService.insert(
+          tableName: 'PRODUCTS', entity: model.toMap());
 
       return true;
     } catch (e) {
@@ -79,16 +58,15 @@ class ProductController {
 
   Future<bool> put(ProductModel model) async {
     try {
-      CollectionReference query =
-          FirebaseFirestore.instance.collection('Products');
-
-      await query.doc(model.id).update(model.toMap());
+      await databaseService.update(
+          tableName: 'PRODUCTS',
+          entity: model.toMap(),
+          whereParams: 'ID = ?',
+          whereValues: [model.id]);
 
       return true;
     } catch (error) {
       return false;
     }
   }
-
- 
 }

@@ -3,66 +3,32 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_store/src/core/extensions/parser_extension_object.dart';
 import 'package:my_store/src/modules/product/controller/product_controller.dart';
 import 'package:my_store/src/modules/product/model/product_model.dart';
-import 'package:my_store/src/modules/product/view/bloc/product_state.dart';
+import 'package:my_store/src/modules/product/view/bloc/form/product_form_state.dart';
 
-class ProductBloc extends Cubit<ProductState> {
+class ProductFormBloc extends Cubit<ProductFormState> {
   final ProductController controller;
 
-  ProductBloc(
+  ProductFormBloc(
     this.controller,
-  ) : super(ProductState.initial());
-
-  Future<void> getAll() async {
-    try {
-      emit(state.copyWith(status: ProductStatus.loading));
-
-      final result = await controller.getAll();
-
-      emit(state.copyWith(status: ProductStatus.loaded, listOfProduct: result));
-    } catch (e) {
-      emit(state.copyWith(status: ProductStatus.error));
-    }
-  }
+  ) : super(ProductFormState.initial());
 
   Future<void> create(ProductModel model) async {
     try {
-      emit(state.copyWith(status: ProductStatus.loading));
+      emit(state.copyWith(status: ProductFormStatus.loading));
 
       await controller.post(model);
 
       emit(
         state.copyWith(
-          statusForm: ProductFormStatus.created,
+          status: ProductFormStatus.created,
           message: 'Produto criado com sucesso',
         ),
       );
     } catch (e) {
       emit(
         state.copyWith(
-          statusForm: ProductFormStatus.error,
+          status: ProductFormStatus.error,
           message: 'Falha ao criar produto',
-        ),
-      );
-    }
-  }
-
-  Future<void> delete(String id) async {
-    try {
-      emit(state.copyWith(statusForm: ProductFormStatus.loading));
-
-      await controller.delete(id);
-
-      emit(
-        state.copyWith(
-          statusForm: ProductFormStatus.deleted,
-          message: 'Produto excluído com sucesso',
-        ),
-      );
-    } catch (e) {
-      emit(
-        state.copyWith(
-          statusForm: ProductFormStatus.error,
-          message: 'Falha ao excluir produto',
         ),
       );
     }
@@ -70,20 +36,20 @@ class ProductBloc extends Cubit<ProductState> {
 
   Future<void> update(ProductModel model) async {
     try {
-      emit(state.copyWith(statusForm: ProductFormStatus.loading));
+      emit(state.copyWith(status: ProductFormStatus.loading));
 
-      await controller.post(model);
+      await controller.put(model);
 
       emit(
         state.copyWith(
-          statusForm: ProductFormStatus.updated,
+          status: ProductFormStatus.updated,
           message: 'Produto atualizado com sucesso',
         ),
       );
     } catch (e) {
       emit(
         state.copyWith(
-          statusForm: ProductFormStatus.error,
+          status: ProductFormStatus.error,
           message: 'Falha ao atualizar produto',
         ),
       );
@@ -92,21 +58,41 @@ class ProductBloc extends Cubit<ProductState> {
 
   Future<void> get(String? id) async {
     try {
-      emit(state.copyWith(statusForm: ProductFormStatus.loading));
+      emit(state.copyWith(status: ProductFormStatus.loading));
 
-      if (!id.isNull()) {
-        await controller.get(id!);
+      if (id.isNull()) {
+        emit(
+          state.copyWith(
+            status: ProductFormStatus.loaded,
+          ),
+        );
       }
 
-      emit(
-        state.copyWith(
-          statusForm: ProductFormStatus.loaded,
-        ),
-      );
+      final result = await controller.get(id!);
+
+      if (result.isNull()) {
+        emit(
+          state.copyWith(
+            id: result!.id,
+            status: ProductFormStatus.loaded,
+            title: result.title,
+            description: result.description,
+            url: result.urlImage,
+            price: result.price,
+          ),
+        );
+      } else {
+        emit(
+          state.copyWith(
+            status: ProductFormStatus.error,
+            message: 'Falha ao carregar produto',
+          ),
+        );
+      }
     } catch (e) {
       emit(
         state.copyWith(
-          statusForm: ProductFormStatus.error,
+          status: ProductFormStatus.error,
           message: 'Falha ao carregar produto',
         ),
       );
