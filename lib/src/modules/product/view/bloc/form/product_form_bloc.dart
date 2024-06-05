@@ -138,7 +138,7 @@ class ProductFormBloc extends Cubit<ProductFormState> {
     );
   }
 
-  Future<void> setTypeProduct(String? value) async {
+  Future<void> setTypeProduct(int? value) async {
     return emit(
       state.copyWith(
         hasChanged: true,

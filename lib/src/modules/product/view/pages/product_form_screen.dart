@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:my_store/src/core/extensions/parser_extension_object.dart';
+import 'package:my_store/src/core/extensions/parser_extension_string.dart';
 import 'package:my_store/src/modules/product/model/product_model.dart';
 import 'package:my_store/src/modules/product/view/bloc/form/product_form_bloc.dart';
 import 'package:my_store/src/modules/product/view/bloc/form/product_form_state.dart';
@@ -72,8 +73,7 @@ class _ProductFormScreenState extends State<ProductFormScreen> {
             );
           }
 
-          final codeImage =
-              _getCodeFromTypeProduct(state.typeProduct ?? 'Camisetas');
+          final codeImage = state.typeProduct ?? 'Camisetas';
 
           return Stack(
             alignment: Alignment.bottomCenter,
@@ -148,7 +148,7 @@ class _ProductFormScreenState extends State<ProductFormScreen> {
                           ),
                           AppDropDownOptions(
                             onSelected: (typeProduct) =>
-                                bloc.setTypeProduct(typeProduct),
+                                bloc.setTypeProduct(typeProduct?.convertToInt()),
                             list: const [
                               'Camiseta',
                               'Calça',
@@ -249,7 +249,7 @@ class _ProductFormScreenState extends State<ProductFormScreen> {
                           ProductModel(
                             title: state.title!,
                             description: state.description!,
-                            type: '',
+                            type: state.typeProduct!,
                             urlImage: state.url!,
                             price: state.price!,
                           ),
@@ -259,7 +259,7 @@ class _ProductFormScreenState extends State<ProductFormScreen> {
                           ProductModel(
                             title: state.title!,
                             description: state.description!,
-                            type: '',
+                            type: state.typeProduct!,
                             urlImage: state.url!,
                             price: state.price!,
                           ),

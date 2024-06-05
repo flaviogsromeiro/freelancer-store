@@ -16,7 +16,7 @@ class ProductFormState {
   final String? id;
   final String? description;
   final String? price;
-  final String? typeProduct;
+  final int? typeProduct;
   final String? url;
   final bool hasChanged;
 
@@ -44,7 +44,7 @@ class ProductFormState {
     String? id,
     String? description,
     String? price,
-    String? typeProduct,
+    int? typeProduct,
     String? url,
     bool? hasChanged,
   }) {

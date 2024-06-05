@@ -3,7 +3,7 @@ class ProductModel {
   final String? id;
   final String title;
   final String description;
-  final String type;
+  final int type;
   final String urlImage;
   final String price;
 
@@ -19,7 +19,7 @@ class ProductModel {
   factory ProductModel.instance() => ProductModel(
         title: '',
         description: '',
-        type: '',
+        type: 0,
         urlImage: '',
         price: '',
       );
@@ -40,7 +40,7 @@ class ProductModel {
       id: map['ID'] != null ? map['ID'] as String : null,
       title: map['TITLE'] as String,
       description: map['DESCRIPTION'] as String,
-      type: map['TYPE'] as String,
+      type: map['TYPE'] as int,
       urlImage: map['URLIMAGE'] as String,
       price: map['PRICE'] as String,
     );

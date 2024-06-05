@@ -29,6 +29,7 @@ class ProductController {
             (e) => ProductModel.fromMap(e as Map<String, dynamic>),
           )
           .toList();
+          
     } catch (e) {
       return [];
     }
