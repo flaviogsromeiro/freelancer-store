@@ -57,6 +57,8 @@ class ProductFormBloc extends Cubit<ProductFormState> {
   }
 
   Future<void> get(String? id) async {
+    ProductModel? result;
+
     try {
       emit(state.copyWith(status: ProductFormStatus.loading));
 
@@ -66,11 +68,11 @@ class ProductFormBloc extends Cubit<ProductFormState> {
             status: ProductFormStatus.loaded,
           ),
         );
+      } else {
+        result = await controller.get(id!);
       }
 
-      final result = await controller.get(id!);
-
-      if (result.isNull()) {
+      if (!result.isNull()) {
         emit(
           state.copyWith(
             id: result!.id,

@@ -29,7 +29,6 @@ class ImagesNetworkPath {
     ],
     //Saia
     4: [
-      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0Oao0NaW5lLvwlwni499OwE4YISm1gZ9lJg&s',
       'https://d1zvfmhlebc91g.cloudfront.net/fit-in/1000x1000/filters:fill(ffffff)/filters:background_color(ffffff)/filters:quality(100)/n49shopv2_lojapadrao/images/products/636ea6283f01d/saia_verde_padrao_55421_1-636ea6283f06d.jpg',
       'https://a-static.mlcdn.com.br/450x450/saia-midi-gode-cintura-alta-rodada-em-viscolinho-verde-militar-click-tudo/clicktudo/16057122253/33b6ba1b3bed8beeba889608f7e2a0ca.jpeg',
       'https://acdn.mitiendanube.com/stores/736/370/products/img_8919baixa1-c7c9b0856ac32d8f1616487770544342-1024-1024.jpg',

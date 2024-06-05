@@ -110,7 +110,8 @@ class _ProductsListScreenState extends State<ProductsListScreen> {
                 condition: state.listOfProductFiltered.isEmpty,
                 firstChild: Expanded(
                   child: AppListEmpty(
-                      message: state.listOfProductFiltered.isEmpty && controller.text.isNotEmpty
+                      message: state.listOfProductFiltered.isEmpty &&
+                              controller.text.isNotEmpty
                           ? 'Produto não encontrado'
                           : 'Nenhum produto adicionado'),
                 ),
@@ -153,8 +154,12 @@ class _ProductsListScreenState extends State<ProductsListScreen> {
         },
       ),
       floatingActionButton: AppFloatingActionButton(
-        action: () => Navigator.of(context).push(
-            MaterialPageRoute(builder: (context) => const ProductFormScreen())),
+        action: () => Navigator.of(context)
+            .push(MaterialPageRoute(
+                builder: (context) => const ProductFormScreen()))
+            .then((_) {
+          bloc.getAll();
+        }),
       ),
     );
   }

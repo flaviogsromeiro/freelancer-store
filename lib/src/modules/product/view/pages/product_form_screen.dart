@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:my_store/src/core/di/dependency_assembly.dart' as di;
 import 'package:my_store/src/core/extensions/parser_extension_object.dart';
-import 'package:my_store/src/core/extensions/parser_extension_string.dart';
 import 'package:my_store/src/modules/product/model/product_model.dart';
 import 'package:my_store/src/modules/product/view/bloc/form/product_form_bloc.dart';
 import 'package:my_store/src/modules/product/view/bloc/form/product_form_state.dart';
@@ -43,242 +43,244 @@ class _ProductFormScreenState extends State<ProductFormScreen> {
 
   @override
   void initState() {
-    bloc = context.read<ProductFormBloc>();
+    bloc = di.dependencyAssembly<ProductFormBloc>();
     bloc.get(widget.id);
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBarSimple(
-        title: 'Criar Produto',
-        // isPop: state.hasChanged,
-      ),
-      body: BlocConsumer<ProductFormBloc, ProductFormState>(
-        bloc: bloc,
-        listener: (context, state) {
-          if (state.status == ProductFormStatus.created) {
-            Dialogs.showModalSuccessMessage(context, message: state.message!)
-                .then((value) {
-              Navigator.pop(context);
-            });
-          }
-        },
-        builder: (context, state) {
-          if (state.status == ProductFormStatus.initial ||
-              state.status == ProductFormStatus.loading) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          }
+    return BlocProvider(
+      create: (context) => bloc,
+      child: Scaffold(
+        appBar: AppBarSimple(
+          title: 'Criar Produto',
+          // isPop: state.hasChanged,
+        ),
+        body: BlocConsumer<ProductFormBloc, ProductFormState>(
+          listener: (context, state) {
+            if (state.status == ProductFormStatus.created) {
+              Dialogs.showModalSuccessMessage(context, message: state.message!)
+                  .then((value) {
+                Navigator.pop(context);
+              });
+            }
+          },
+          builder: (context, state) {
+            if (state.status == ProductFormStatus.initial ||
+                state.status == ProductFormStatus.loading) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            }
 
-          final codeImage = state.typeProduct ?? 'Camisetas';
+            final codeImage = state.typeProduct ?? 'Camisetas';
 
-          return Stack(
-            alignment: Alignment.bottomCenter,
-            children: [
-              ColoredBox(
-                color: Styles.primatySecondary,
-                child: Container(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: Utils.heightSize(context) * 0.02,
-                    vertical: Utils.heightSize(context) * 0.02,
-                  ),
-                  width: double.infinity,
-                  height: MediaQuery.of(context).size.height * 0.95,
-                  decoration: BoxDecoration(
-                    color: Styles.tertiary,
-                    borderRadius: const BorderRadius.only(
-                      topLeft: Radius.circular(50),
-                      topRight: Radius.circular(50),
+            return Stack(
+              alignment: Alignment.bottomCenter,
+              children: [
+                ColoredBox(
+                  color: Styles.primatySecondary,
+                  child: Container(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: Utils.heightSize(context) * 0.02,
+                      vertical: Utils.heightSize(context) * 0.02,
                     ),
-                  ),
-                  child: SingleChildScrollView(
-                    child: Form(
-                      canPop: !state.hasChanged,
-                      onPopInvoked: (didPop) async {
-                        if (!didPop) {
-                          await Dialogs.showDialogAction(
-                            context: context,
-                            title: 'Sair sem salvar',
-                            titleAction: 'Sim',
-                            onPressed: () => Navigator.pop(context),
-                          );
-                        }
-                      },
-                      key: _formKey,
-                      child: Column(
-                        children: [
-                          AppTextFormField(
-                            action: (value) => bloc.setTitle(value),
-                            label: 'Título',
-                            enable: true,
-                            onlyRead: false,
-                            text: state.title,
-                            onValidator: (value) => Validator.validateField(
-                                value, 'Informe uma título válido'),
-                          ),
-                          const SizedBox(
-                            height: 15,
-                          ),
-                          AppObservationField(
-                            enable: true,
-                            text: state.description,
-                            action: (value) => bloc.setDescription(value),
-                          ),
-                          const SizedBox(
-                            height: 15,
-                          ),
-                          AppTextFormField(
-                              action: (text) => bloc.setPrice(text),
-                              label: 'Preço',
-                              textInputType: TextInputType.number,
+                    width: double.infinity,
+                    height: MediaQuery.of(context).size.height * 0.95,
+                    decoration: BoxDecoration(
+                      color: Styles.tertiary,
+                      borderRadius: const BorderRadius.only(
+                        topLeft: Radius.circular(50),
+                        topRight: Radius.circular(50),
+                      ),
+                    ),
+                    child: SingleChildScrollView(
+                      child: Form(
+                        canPop: !state.hasChanged,
+                        onPopInvoked: (didPop) async {
+                          if (!didPop) {
+                            await Dialogs.showDialogAction(
+                              context: context,
+                              title: 'Sair sem salvar',
+                              titleAction: 'Sim',
+                              onPressed: () => Navigator.pop(context),
+                            );
+                          }
+                        },
+                        key: _formKey,
+                        child: Column(
+                          children: [
+                            AppTextFormField(
+                              action: (value) => bloc.setTitle(value),
+                              label: 'Título',
                               enable: true,
                               onlyRead: false,
-                              text: state.price,
-                              inputFormatters: [
-                                FilteringTextInputFormatter.digitsOnly,
-                                CentavosInputFormatter(moeda: true),
+                              text: state.title,
+                              onValidator: (value) => Validator.validateField(
+                                  value, 'Informe uma título válido'),
+                            ),
+                            const SizedBox(
+                              height: 15,
+                            ),
+                            AppObservationField(
+                              enable: true,
+                              text: state.description,
+                              action: (value) => bloc.setDescription(value),
+                            ),
+                            const SizedBox(
+                              height: 15,
+                            ),
+                            AppTextFormField(
+                                action: (text) => bloc.setPrice(text),
+                                label: 'Preço',
+                                textInputType: TextInputType.number,
+                                enable: true,
+                                onlyRead: false,
+                                text: state.price,
+                                inputFormatters: [
+                                  FilteringTextInputFormatter.digitsOnly,
+                                  CentavosInputFormatter(moeda: true),
+                                ],
+                                onValidator: (value) => Validator.validateField(
+                                    value, 'Informe uma título válido')),
+                            const SizedBox(
+                              height: 15,
+                            ),
+                            AppDropDownOptions(
+                              onSelected: (typeProduct) => bloc.setTypeProduct(
+                                  _getCodeFromTypeProduct(typeProduct!)),
+                              list: const [
+                                'Camiseta',
+                                'Calça',
+                                'Bermuda',
+                                'Saia',
                               ],
                               onValidator: (value) => Validator.validateField(
-                                  value, 'Informe uma título válido')),
-                          const SizedBox(
-                            height: 15,
-                          ),
-                          AppDropDownOptions(
-                            onSelected: (typeProduct) =>
-                                bloc.setTypeProduct(typeProduct?.convertToInt()),
-                            list: const [
-                              'Camiseta',
-                              'Calça',
-                              'Bermuda',
-                              'Saia',
-                            ],
-                            onValidator: (value) => Validator.validateField(
-                                value, 'Informe o tipo do produto'),
-                            enable: true,
-                            labelText: 'Tipo do produto',
-                            hint: 'Selecione o tipo do produto',
-                            // value: state.typeExpense?.title,
-                          ),
-                          const SizedBox(
-                            height: 15,
-                          ),
-                          DottedBorder(
-                            borderType: BorderType.RRect,
-                            radius: const Radius.circular(20),
-                            color: Colors.grey,
-                            dashPattern: const [
-                              2,
-                            ],
-                            strokeWidth: 2,
-                            child: GestureDetector(
-                              onTap: () async {
-                                Navigator.of(context).push(
-                                  MaterialPageRoute<String>(
-                                    builder: (context) {
-                                      return ImageProductScreen(
-                                        listOfImages: ImagesNetworkPath
-                                                .mapImagesProducts[codeImage]
-                                            as List<String>,
-                                      );
-                                    },
+                                  value, 'Informe o tipo do produto'),
+                              enable: true,
+                              labelText: 'Tipo do produto',
+                              hint: 'Selecione o tipo do produto',
+                              // value: state.typeExpense?.title,
+                            ),
+                            const SizedBox(
+                              height: 15,
+                            ),
+                            DottedBorder(
+                              borderType: BorderType.RRect,
+                              radius: const Radius.circular(20),
+                              color: Colors.grey,
+                              dashPattern: const [
+                                2,
+                              ],
+                              strokeWidth: 2,
+                              child: GestureDetector(
+                                onTap: () async {
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute<String>(
+                                      builder: (context) {
+                                        return ImageProductScreen(
+                                          listOfImages: ImagesNetworkPath
+                                                  .mapImagesProducts[codeImage]
+                                              as List<String>,
+                                        );
+                                      },
+                                    ),
+                                  ).then(
+                                    (value) => bloc.setImage(value),
+                                  );
+                                },
+                                child: Container(
+                                  height: Utils.widthSize(context) * 0.45,
+                                  width: double.infinity,
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 15),
+                                  decoration: BoxDecoration(
+                                    color: Styles.tertiary,
+                                    borderRadius: BorderRadius.circular(20),
                                   ),
-                                ).then(
-                                  (value) => bloc.setImage(value),
-                                );
-                              },
-                              child: Container(
-                                height: Utils.widthSize(context) * 0.45,
-                                width: double.infinity,
-                                padding:
-                                    const EdgeInsets.symmetric(vertical: 15),
-                                decoration: BoxDecoration(
-                                  color: Styles.tertiary,
-                                  borderRadius: BorderRadius.circular(20),
-                                ),
-                                child: AppConditionalWidget(
-                                  condition: state.url != null &&
-                                      state.url!.isNotEmpty,
-                                  firstChild:
-                                      _cardPhoto(context, state.url ?? ''),
-                                  secondChild: Column(
-                                    mainAxisSize: MainAxisSize.min,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
-                                    children: [
-                                      const Text(
-                                        'Toque para adicionar a imagem do produto',
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                          color: Color.fromARGB(
-                                              255, 109, 109, 109),
+                                  child: AppConditionalWidget(
+                                    condition: state.url != null &&
+                                        state.url!.isNotEmpty,
+                                    firstChild:
+                                        _cardPhoto(context, state.url ?? ''),
+                                    secondChild: Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      children: [
+                                        const Text(
+                                          'Toque para adicionar a imagem do produto',
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                            color: Color.fromARGB(
+                                                255, 109, 109, 109),
+                                          ),
                                         ),
-                                      ),
-                                      FaIcon(
-                                        Icons.camera_alt_outlined,
-                                        size: Utils.widthSize(context) * 0.08,
-                                        color: const Color.fromARGB(
-                                          255,
-                                          164,
-                                          164,
-                                          164,
+                                        FaIcon(
+                                          Icons.camera_alt_outlined,
+                                          size: Utils.widthSize(context) * 0.08,
+                                          color: const Color.fromARGB(
+                                            255,
+                                            164,
+                                            164,
+                                            164,
+                                          ),
                                         ),
-                                      ),
-                                    ],
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                   ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 15),
-                child: AppButtonWidget(
-                  titleButton: 'Salvar',
-                  onPressed: () {
-                    if (_formKey.currentState!.validate()) {
-                      if (widget.id.isNull()) {
-                        bloc.create(
-                          ProductModel(
-                            title: state.title!,
-                            description: state.description!,
-                            type: state.typeProduct!,
-                            urlImage: state.url!,
-                            price: state.price!,
-                          ),
-                        );
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 15),
+                  child: AppButtonWidget(
+                    titleButton: 'Salvar',
+                    onPressed: () {
+                      if (_formKey.currentState!.validate()) {
+                        if (widget.id.isNull()) {
+                          bloc.create(
+                            ProductModel(
+                              title: state.title!,
+                              description: state.description!,
+                              type: state.typeProduct!,
+                              urlImage: state.url!,
+                              price: state.price!,
+                            ),
+                          );
+                        } else {
+                          bloc.update(
+                            ProductModel(
+                              title: state.title!,
+                              description: state.description!,
+                              type: state.typeProduct!,
+                              urlImage: state.url!,
+                              price: state.price!,
+                            ),
+                          );
+                        }
                       } else {
-                        bloc.update(
-                          ProductModel(
-                            title: state.title!,
-                            description: state.description!,
-                            type: state.typeProduct!,
-                            urlImage: state.url!,
-                            price: state.price!,
-                          ),
+                        Dialogs.showSnackBarMessage(
+                          context,
+                          message: 'Verifique os campos',
+                          color: Colors.red,
                         );
                       }
-                    } else {
-                      Dialogs.showSnackBarMessage(
-                        context,
-                        message: 'Verifique os campos',
-                        color: Colors.red,
-                      );
-                    }
-                  },
-                  isLoading: state.status == ProductFormStatus.loading,
+                    },
+                    isLoading: state.status == ProductFormStatus.loading,
+                  ),
                 ),
-              ),
-            ],
-          );
-        },
+              ],
+            );
+          },
+        ),
       ),
     );
   }
