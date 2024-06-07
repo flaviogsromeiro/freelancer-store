@@ -4,6 +4,7 @@ import 'package:my_store/src/modules/product/view/bloc/list/product_bloc.dart';
 import 'package:my_store/src/modules/product/view/bloc/list/product_state.dart';
 import 'package:my_store/src/modules/product/view/pages/product_form_screen.dart';
 import 'package:my_store/src/modules/product/view/pages/product_loading_shimmer.dart';
+import 'package:my_store/src/modules/product/view/pages/product_screen.dart';
 import 'package:my_store/src/modules/product/view/widgets/card_product_list.dart';
 import 'package:my_store/src/ui/appBar/appbar_simple.dart';
 import 'package:my_store/src/ui/buttons/app_floating_action_button.dart';
@@ -132,10 +133,9 @@ class _ProductsListScreenState extends State<ProductsListScreen> {
                           return GestureDetector(
                             onTap: () => Navigator.of(context)
                                 .push(MaterialPageRoute(
-                                    builder: (context) => ProductFormScreen(
-                                          id: state
-                                              .listOfProductFiltered[index].id!,
-                                        )))
+                                    builder: (context) => ProductScreen(
+                                        model: state
+                                            .listOfProductFiltered[index])))
                                 .then((value) {
                               setState(() {});
                             }),
@@ -153,13 +153,20 @@ class _ProductsListScreenState extends State<ProductsListScreen> {
           );
         },
       ),
-      floatingActionButton: AppFloatingActionButton(
-        action: () => Navigator.of(context)
-            .push(MaterialPageRoute(
-                builder: (context) => const ProductFormScreen()))
-            .then((_) {
-          bloc.getAll();
-        }),
+      floatingActionButton: BlocBuilder<ProductBloc, ProductState>(
+        builder: (context, state) {
+          return Visibility(
+            visible: state.status == ProductStatus.loaded,
+            child: AppFloatingActionButton(
+              action: () => Navigator.of(context)
+                  .push(MaterialPageRoute(
+                      builder: (context) => const ProductFormScreen()))
+                  .then((_) {
+                bloc.getAll();
+              }),
+            ),
+          );
+        },
       ),
     );
   }

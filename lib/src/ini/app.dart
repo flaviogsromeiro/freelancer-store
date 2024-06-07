@@ -16,12 +16,12 @@ class App extends StatelessWidget {
         ),
       ],
       child: MaterialApp(
-          theme: ThemeData(
-              primarySwatch: Colors.blue,
-              primaryColor: const Color.fromARGB(255, 4, 125, 141)),
-          debugShowCheckedModeBanner: false,
-          // home:  ProductScreen(product: ProductModel(titulo: '', descricao: '', tamanho: '', urlImagem: '', preco: ''),),
-          home: const ProductsListScreen()),
+        theme: ThemeData(
+            primarySwatch: Colors.blue,
+            primaryColor: const Color.fromARGB(255, 4, 125, 141)),
+        debugShowCheckedModeBanner: false,
+        home: const ProductsListScreen(),
+      ),
     );
   }
 }

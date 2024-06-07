@@ -7,6 +7,7 @@ import 'package:my_store/src/modules/product/view/bloc/form/product_form_state.d
 
 class ProductFormBloc extends Cubit<ProductFormState> {
   final ProductController controller;
+  
 
   ProductFormBloc(
     this.controller,
@@ -15,6 +16,8 @@ class ProductFormBloc extends Cubit<ProductFormState> {
   Future<void> create(ProductModel model) async {
     try {
       emit(state.copyWith(status: ProductFormStatus.loading));
+
+      
 
       await controller.post(model);
 
@@ -62,8 +65,10 @@ class ProductFormBloc extends Cubit<ProductFormState> {
     try {
       emit(state.copyWith(status: ProductFormStatus.loading));
 
+      await Future.delayed(const Duration(seconds: 1));
+
       if (id.isNull()) {
-        emit(
+        return emit(
           state.copyWith(
             status: ProductFormStatus.loaded,
           ),
@@ -73,18 +78,18 @@ class ProductFormBloc extends Cubit<ProductFormState> {
       }
 
       if (!result.isNull()) {
-        emit(
+        return emit(
           state.copyWith(
-            id: result!.id,
-            status: ProductFormStatus.loaded,
-            title: result.title,
-            description: result.description,
-            url: result.urlImage,
-            price: result.price,
-          ),
+              id: result!.id,
+              status: ProductFormStatus.loaded,
+              title: result.title,
+              description: result.description,
+              url: result.urlImage,
+              price: result.price,
+              typeProduct: result.type),
         );
       } else {
-        emit(
+        return emit(
           state.copyWith(
             status: ProductFormStatus.error,
             message: 'Falha ao carregar produto',
@@ -92,10 +97,42 @@ class ProductFormBloc extends Cubit<ProductFormState> {
         );
       }
     } catch (e) {
-      emit(
+      return emit(
         state.copyWith(
           status: ProductFormStatus.error,
           message: 'Falha ao carregar produto',
+        ),
+      );
+    }
+  }
+
+  Future<void> delete(String id) async {
+    try {
+      emit(state.copyWith(status: ProductFormStatus.loading));
+
+      await Future.delayed(const Duration(seconds: 1));
+
+      final isDeleted = await controller.delete(id);
+
+      if (isDeleted) {
+        return emit(
+          state.copyWith(
+              status: ProductFormStatus.deleted,
+              message: 'Produto excluído com sucesso'),
+        );
+      } else {
+        return emit(
+          state.copyWith(
+            status: ProductFormStatus.error,
+            message: 'Falha ao excluir produto',
+          ),
+        );
+      }
+    } catch (e) {
+      return emit(
+        state.copyWith(
+          status: ProductFormStatus.error,
+          message: 'Falha ao excluir produto',
         ),
       );
     }

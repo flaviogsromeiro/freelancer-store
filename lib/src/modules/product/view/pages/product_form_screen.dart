@@ -11,6 +11,8 @@ import 'package:my_store/src/modules/product/model/product_model.dart';
 import 'package:my_store/src/modules/product/view/bloc/form/product_form_bloc.dart';
 import 'package:my_store/src/modules/product/view/bloc/form/product_form_state.dart';
 import 'package:my_store/src/modules/product/view/pages/image_product_screen.dart';
+import 'package:my_store/src/modules/product/view/pages/product_form_loading_shimmer.dart';
+import 'package:my_store/src/modules/product/view/pages/products_list_screen.dart';
 import 'package:my_store/src/ui/appBar/appbar_simple.dart';
 import 'package:my_store/src/ui/buttons/app_button_widget.dart';
 import 'package:my_store/src/ui/dialogs/dialogs.dart';
@@ -22,6 +24,7 @@ import 'package:my_store/src/utils/images_network_path.dart';
 import 'package:my_store/src/utils/style/styles.dart';
 import 'package:my_store/src/utils/utils.dart';
 import 'package:my_store/src/utils/validator.dart';
+import 'package:uuid/uuid.dart';
 
 class ProductFormScreen extends StatefulWidget {
   const ProductFormScreen({
@@ -54,24 +57,27 @@ class _ProductFormScreenState extends State<ProductFormScreen> {
       create: (context) => bloc,
       child: Scaffold(
         appBar: AppBarSimple(
-          title: 'Criar Produto',
+          title: widget.id.isNull() ? 'Criar Produto' : 'Editar Produto',
+          action: [
+            Visibility(
+              visible: !widget.id.isNull(),
+              child: IconButton(
+                  onPressed: () => Dialogs.showDialogAction(
+                      context: context,
+                      onPressed: () => bloc.delete(widget.id!),
+                      title: 'Excluir produto ?',
+                      titleAction: 'Sim'),
+                  icon: const Icon(Icons.delete)),
+            )
+          ],
           // isPop: state.hasChanged,
         ),
         body: BlocConsumer<ProductFormBloc, ProductFormState>(
-          listener: (context, state) {
-            if (state.status == ProductFormStatus.created) {
-              Dialogs.showModalSuccessMessage(context, message: state.message!)
-                  .then((value) {
-                Navigator.pop(context);
-              });
-            }
-          },
+          listener: _listenerBuild,
           builder: (context, state) {
             if (state.status == ProductFormStatus.initial ||
                 state.status == ProductFormStatus.loading) {
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
+              return const ProductFormLoadingShimmer();
             }
 
             final codeImage = state.typeProduct ?? 'Camisetas';
@@ -161,6 +167,7 @@ class _ProductFormScreenState extends State<ProductFormScreen> {
                               enable: true,
                               labelText: 'Tipo do produto',
                               hint: 'Selecione o tipo do produto',
+                              value: _getTypeProductFromCode(state.typeProduct),
                               // value: state.typeExpense?.title,
                             ),
                             const SizedBox(
@@ -176,19 +183,25 @@ class _ProductFormScreenState extends State<ProductFormScreen> {
                               strokeWidth: 2,
                               child: GestureDetector(
                                 onTap: () async {
-                                  Navigator.of(context).push(
-                                    MaterialPageRoute<String>(
-                                      builder: (context) {
-                                        return ImageProductScreen(
-                                          listOfImages: ImagesNetworkPath
-                                                  .mapImagesProducts[codeImage]
-                                              as List<String>,
-                                        );
-                                      },
-                                    ),
-                                  ).then(
-                                    (value) => bloc.setImage(value),
-                                  );
+                                  if (state.typeProduct.isNull()) {
+                                    Dialogs.showSnackBarMessage(context,
+                                        message: 'Informe o tipo do produto',
+                                        color: Colors.red);
+                                  } else {
+                                    Navigator.of(context).push(
+                                      MaterialPageRoute<String>(
+                                        builder: (context) {
+                                          return ImageProductScreen(
+                                            listOfImages: ImagesNetworkPath
+                                                    .mapImagesProducts[
+                                                codeImage] as List<String>,
+                                          );
+                                        },
+                                      ),
+                                    ).then(
+                                      (value) => bloc.setImage(value),
+                                    );
+                                  }
                                 },
                                 child: Container(
                                   height: Utils.widthSize(context) * 0.45,
@@ -239,42 +252,47 @@ class _ProductFormScreenState extends State<ProductFormScreen> {
                     ),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 15),
-                  child: AppButtonWidget(
-                    titleButton: 'Salvar',
-                    onPressed: () {
-                      if (_formKey.currentState!.validate()) {
-                        if (widget.id.isNull()) {
-                          bloc.create(
-                            ProductModel(
-                              title: state.title!,
-                              description: state.description!,
-                              type: state.typeProduct!,
-                              urlImage: state.url!,
-                              price: state.price!,
-                            ),
-                          );
+                Visibility(
+                  visible: state.status == ProductFormStatus.loaded,
+                  child: Padding(
+                    padding: const EdgeInsets.only(bottom: 15),
+                    child: AppButtonWidget(
+                      titleButton: 'Salvar',
+                      onPressed: () {
+                        if (_formKey.currentState!.validate()) {
+                          if (widget.id.isNull()) {
+                            bloc.create(
+                              ProductModel(
+                                id: const Uuid().v1(),
+                                title: state.title!,
+                                description: state.description!,
+                                type: state.typeProduct!,
+                                urlImage: state.url!,
+                                price: state.price!,
+                              ),
+                            );
+                          } else {
+                            bloc.update(
+                              ProductModel(
+                                id: state.id,
+                                title: state.title!,
+                                description: state.description!,
+                                type: state.typeProduct!,
+                                urlImage: state.url!,
+                                price: state.price!,
+                              ),
+                            );
+                          }
                         } else {
-                          bloc.update(
-                            ProductModel(
-                              title: state.title!,
-                              description: state.description!,
-                              type: state.typeProduct!,
-                              urlImage: state.url!,
-                              price: state.price!,
-                            ),
+                          Dialogs.showSnackBarMessage(
+                            context,
+                            message: 'Verifique os campos',
+                            color: Colors.red,
                           );
                         }
-                      } else {
-                        Dialogs.showSnackBarMessage(
-                          context,
-                          message: 'Verifique os campos',
-                          color: Colors.red,
-                        );
-                      }
-                    },
-                    isLoading: state.status == ProductFormStatus.loading,
+                      },
+                      isLoading: state.status == ProductFormStatus.loading,
+                    ),
                   ),
                 ),
               ],
@@ -283,6 +301,36 @@ class _ProductFormScreenState extends State<ProductFormScreen> {
         ),
       ),
     );
+  }
+
+  void _listenerBuild(BuildContext context, ProductFormState state) {
+    if (state.status == ProductFormStatus.created) {
+      Dialogs.showModalSuccessMessage(context, message: state.message!)
+          .then((value) {
+        Navigator.pop(context);
+      });
+    }
+    if (state.status == ProductFormStatus.updated) {
+      Dialogs.showModalSuccessMessage(context, message: state.message!)
+          .then((value) {
+        Navigator.pushReplacement(context,
+            MaterialPageRoute(builder: (_) => const ProductsListScreen()));
+      });
+    }
+    if (state.status == ProductFormStatus.deleted) {
+      Dialogs.showModalSuccessMessage(context, message: state.message!)
+          .then((value) {
+        Navigator.pushReplacement(context,
+            MaterialPageRoute(builder: (_) => const ProductsListScreen()));
+      });
+    }
+    if (state.status == ProductFormStatus.error) {
+      Dialogs.showModalErrorMessage(context, message: state.message!)
+          .then((value) {
+        Navigator.pushReplacement(context,
+            MaterialPageRoute(builder: (_) => const ProductsListScreen()));
+      });
+    }
   }
 
   Widget _cardPhoto(BuildContext context, String urlImage) {
@@ -341,6 +389,21 @@ class _ProductFormScreenState extends State<ProductFormScreen> {
         return 3;
       default:
         return 4;
+    }
+  }
+
+  String? _getTypeProductFromCode(int? value) {
+    switch (value) {
+      case 1:
+        return 'Camiseta';
+      case 2:
+        return 'Calça';
+      case 3:
+        return 'Bermuda';
+      case 4:
+        return 'Saia';
+      default:
+        return null;
     }
   }
 }

@@ -48,13 +48,10 @@ class _AppObservationFieldState extends State<AppObservationField> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      // margin: EdgeInsets.only(
-      //   bottom: Utils.heightSize(context) * 0.025,
-      //   top: Utils.heightSize(context) * 0.01,
-      // ),
       height: Utils.widthSize(context) * 0.25,
       width: double.infinity,
       child: TextFormField(
+        textCapitalization: TextCapitalization.sentences,
         scrollPadding: const EdgeInsets.only(bottom: 200),
         cursorColor: Styles.primary,
         maxLength: 100,
