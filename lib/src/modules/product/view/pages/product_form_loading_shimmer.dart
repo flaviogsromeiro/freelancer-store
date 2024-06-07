@@ -9,14 +9,14 @@ class ProductFormLoadingShimmer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ColoredBox(
-      color: Styles.primatySecondary,
+      color: Styles.tertiary,
       child: Container(
         padding: EdgeInsets.symmetric(
           horizontal: Utils.heightSize(context) * 0.02,
           vertical: Utils.heightSize(context) * 0.02,
         ),
         decoration: BoxDecoration(
-          color: Styles.tertiary,
+          color: Styles.quartenary,
           borderRadius: const BorderRadius.only(
             topLeft: Radius.circular(50),
             topRight: Radius.circular(50),

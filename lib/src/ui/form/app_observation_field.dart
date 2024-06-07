@@ -70,7 +70,7 @@ class _AppObservationFieldState extends State<AppObservationField> {
           filled: true,
           fillColor: Colors.transparent,
           labelStyle: TextStyle(
-            color: _isFocus ? Styles.primary : null,
+            color: Styles.primary,
           ),
           labelText: 'Descrição',
           contentPadding: const EdgeInsets.all(15),
@@ -88,12 +88,12 @@ class _AppObservationFieldState extends State<AppObservationField> {
             gapPadding: 25,
             borderRadius: BorderRadius.all(Radius.circular(20)),
           ),
-          enabledBorder: const OutlineInputBorder(
+          enabledBorder: OutlineInputBorder(
             borderSide: BorderSide(
-              color: Colors.grey,
+              color: Styles.primary,
             ),
             // gapPadding: 25,
-            borderRadius: BorderRadius.all(Radius.circular(20)),
+            borderRadius: const BorderRadius.all(Radius.circular(20)),
           ),
           isDense: true,
         ),

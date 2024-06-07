@@ -23,14 +23,14 @@ class AppActionAppBar extends StatelessWidget {
       width: Utils.widthSize(context) * 0.102,
       decoration: BoxDecoration(
         shape: BoxShape.circle,
-        color: Styles.primatySecondary,
+        color: Styles.primary,
       ),
       child: Center(
         child: IconButton(
           onPressed: action,
           icon: Icon(
             icon,
-            color: Styles.primary,
+            color: Styles.quartenary,
             size: 18,
           ),
         ),

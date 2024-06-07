@@ -17,7 +17,7 @@ class AppRefreshIndicator extends StatelessWidget {
     return RefreshIndicator(
       onRefresh: onRefresh,
       backgroundColor: Styles.primary,
-      color: Styles.primatySecondary,
+      color: Styles.quartenary,
       child: Stack(
         alignment: Alignment.topCenter,
         children: [

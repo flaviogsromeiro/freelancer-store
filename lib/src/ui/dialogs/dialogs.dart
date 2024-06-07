@@ -109,7 +109,7 @@ class Dialogs {
               ),
             ),
             Divider(
-              color: Styles.primatySecondary,
+              color: Styles.quartenary,
               indent: 15,
               endIndent: 15,
             ),
@@ -185,7 +185,7 @@ class Dialogs {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10),
               ),
-              foregroundColor: Styles.primatySecondary,
+              foregroundColor: Styles.quartenary,
               backgroundColor: Styles.primary,
             ),
             child: const Text('Excluir'),
@@ -216,7 +216,7 @@ class Dialogs {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),
           ),
-          backgroundColor: Styles.tertiary,
+          backgroundColor: Styles.quartenary,
           actionsAlignment: MainAxisAlignment.center,
           titlePadding: const EdgeInsets.only(top: 10),
           actionsPadding: EdgeInsets.zero,
@@ -246,7 +246,7 @@ class Dialogs {
                         context,
                       ).pop(),
                       title: 'Voltar',
-                      color: const Color.fromARGB(255, 98, 98, 98),
+                      color: Styles.secondary,
                     ),
                   ),
                 ),
@@ -285,7 +285,7 @@ class Dialogs {
         return Theme(
           data: Theme.of(context).copyWith(
             datePickerTheme: DatePickerThemeData(
-              dividerColor: Styles.primatySecondary,
+              dividerColor: Styles.quartenary,
               backgroundColor: Styles.tertiary,
               headerForegroundColor: Styles.tertiary,
               headerBackgroundColor: Styles.primary,

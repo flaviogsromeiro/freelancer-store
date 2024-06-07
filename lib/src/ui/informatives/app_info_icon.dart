@@ -18,13 +18,13 @@ class AppInfoIcon extends StatelessWidget {
       width: 50,
       alignment: Alignment.center,
       decoration: BoxDecoration(
-        border: Border.all(color: Styles.primatySecondary),
+        border: Border.all(color: Styles.quartenary),
         color: Styles.tertiary,
         shape: BoxShape.circle,
       ),
       child: FaIcon(
         icon,
-        color: Styles.primatySecondary,
+        color: Styles.quartenary,
       ),
     );
   }

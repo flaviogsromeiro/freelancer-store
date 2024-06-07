@@ -2,12 +2,10 @@ import 'package:flutter/material.dart';
 
 class Styles {
   // Style
-  static Color primary = Colors.green;
-  static Color primatySecondary = const Color.fromARGB(255, 233, 108, 126);
-  static Color secondary = const Color.fromARGB(255, 4, 90, 14);
-  static Color tertiary = Colors.white;
-  static Color tertiarySecondaty = const Color.fromARGB(255, 221, 234, 101);
-  static Color grey = const Color.fromARGB(255, 207, 207, 207);
+  static Color primary = const Color(0xffFF6607);
+  static Color secondary = const Color(0xff000000);
+  static Color tertiary = const Color.fromARGB(255, 255, 188, 147);
+  static Color quartenary = const Color(0xFFFFFFFF);
 
   static const String robotoFont = 'Roboto';
 
@@ -18,7 +16,7 @@ class Styles {
   static TextStyle titleStyle = TextStyle(
     fontFamily: robotoFont,
     fontWeight: FontWeight.bold,
-    color: tertiary,
+    color: quartenary,
     fontSize: 35,
   );
   static TextStyle titleAppBarStyle = TextStyle(

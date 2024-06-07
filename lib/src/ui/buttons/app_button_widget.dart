@@ -21,7 +21,7 @@ class AppButtonWidget extends StatelessWidget {
       height: 45,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          disabledBackgroundColor: Styles.primatySecondary,
+          disabledBackgroundColor: Styles.quartenary,
           backgroundColor: Styles.primary,
           shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(30)),
@@ -43,7 +43,7 @@ class AppButtonWidget extends StatelessWidget {
       height: 25,
       width: 25,
       child: CircularProgressIndicator(
-        color: Styles.primary,
+        color: Styles.quartenary,
       ),
     );
   }

@@ -7,11 +7,10 @@ class AppDivider extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-      
       children: [
         Expanded(
           child: Divider(
-            color: Styles.primatySecondary,
+            color: Styles.quartenary,
             height: 6,
             thickness: 1,
           ),
@@ -20,7 +19,7 @@ class AppDivider extends StatelessWidget {
           width: 8,
           height: 8,
           decoration: BoxDecoration(
-            color: Styles.primatySecondary,
+            color: Styles.quartenary,
             shape: BoxShape.circle,
           ),
         ),

@@ -1,17 +1,18 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:my_store/src/core/extensions/parser_extension_object.dart';
 import 'package:my_store/src/utils/style/styles.dart';
 
 class AppBarSimple extends StatelessWidget implements PreferredSizeWidget {
   AppBarSimple({
-    required this.title,
+    this.title,
     this.isPop = false,
     super.key,
     this.action,
     this.leading,
   });
 
-  final String title;
+  final String? title;
   final List<Widget>? action;
   final Widget? leading;
   bool isPop;
@@ -19,20 +20,30 @@ class AppBarSimple extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: Styles.primatySecondary,
+      backgroundColor: Styles.tertiary,
       titleSpacing: 2,
       toolbarHeight: 65,
-      // leading: leading ?? AppBackWidget(
-      //   isPop: isPop,
-      // ),
       leadingWidth: 65,
       elevation: 0,
       centerTitle: true,
-      title: Text(
-        title,
-        style: TextStyle(color: Styles.tertiary),
+      shape: const OutlineInputBorder(
+        borderSide: BorderSide.none,
+        borderRadius: BorderRadius.only(
+          bottomLeft: Radius.circular(15),
+          bottomRight: Radius.circular(15),
+        ),
       ),
+      title: title.isNull()
+          ? Image.asset(
+              'assets/logo-extends.png',
+              scale: 4,
+            )
+          : Text(
+              title!,
+              style: TextStyle(color: Styles.secondary),
+            ),
       actions: action,
+      iconTheme: IconThemeData(color: Styles.primary),
     );
   }
 

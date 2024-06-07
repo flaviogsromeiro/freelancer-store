@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:my_store/src/modules/product/model/product_model.dart';
 import 'package:my_store/src/modules/product/view/pages/product_form_screen.dart';
 import 'package:my_store/src/ui/appBar/appbar_simple.dart';
+import 'package:my_store/src/utils/style/styles.dart';
 import 'package:my_store/src/utils/utils.dart';
 
 class ProductScreen extends StatelessWidget {
@@ -48,19 +49,19 @@ class ProductScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const ListTile(
+                ListTile(
                   contentPadding: EdgeInsets.zero,
                   minTileHeight: 0,
                   horizontalTitleGap: 5,
                   leading: Icon(
                     Icons.label_important_outline,
-                    color: Colors.grey,
+                    color: Styles.tertiary,
                   ),
                   title: Text(
                     'Título',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      color: Colors.grey,
+                      color: Styles.tertiary,
                     ),
                   ),
                 ),
@@ -81,15 +82,15 @@ class ProductScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const ListTile(
+                ListTile(
                   contentPadding: EdgeInsets.zero,
                   minTileHeight: 0,
                   horizontalTitleGap: 5,
-                  leading: Icon(Icons.attach_money, color: Colors.grey),
+                  leading: Icon(Icons.attach_money, color: Styles.tertiary),
                   title: Text(
                     'Preço',
                     style: TextStyle(
-                        fontWeight: FontWeight.bold, color: Colors.grey),
+                        fontWeight: FontWeight.bold, color: Styles.tertiary),
                   ),
                 ),
                 Text(
@@ -106,15 +107,15 @@ class ProductScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const ListTile(
+                  ListTile(
                     contentPadding: EdgeInsets.zero,
                     minTileHeight: 0,
                     horizontalTitleGap: 5,
-                    leading: Icon(Icons.local_offer, color: Colors.grey),
+                    leading: Icon(Icons.local_offer, color: Styles.tertiary),
                     title: Text(
                       'Descrição',
                       style: TextStyle(
-                        color: Colors.grey,
+                        color: Styles.tertiary,
                         fontWeight: FontWeight.bold,
                       ),
                     ),

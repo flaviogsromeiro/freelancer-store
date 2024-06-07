@@ -21,7 +21,7 @@ class AppFloatingActionButton extends StatelessWidget {
         shape: const CircleBorder(),
         child: FaIcon(
           FontAwesomeIcons.plus,
-          color: Styles.primatySecondary,
+          color: Styles.quartenary,
           size: 30,
         ),
       ),

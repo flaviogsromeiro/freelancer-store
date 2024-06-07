@@ -56,7 +56,7 @@ class CardProductList extends StatelessWidget {
                 Text(
                   model.price,
                   style: TextStyle(
-                      color: Theme.of(context).primaryColor,
+                      color: Styles.secondary,
                       fontSize: 17.0,
                       fontWeight: FontWeight.bold),
                 )

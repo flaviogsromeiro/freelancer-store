@@ -56,6 +56,7 @@ class _ProductFormScreenState extends State<ProductFormScreen> {
     return BlocProvider(
       create: (context) => bloc,
       child: Scaffold(
+        backgroundColor: Styles.tertiary,
         appBar: AppBarSimple(
           title: widget.id.isNull() ? 'Criar Produto' : 'Editar Produto',
           action: [
@@ -86,7 +87,7 @@ class _ProductFormScreenState extends State<ProductFormScreen> {
               alignment: Alignment.bottomCenter,
               children: [
                 ColoredBox(
-                  color: Styles.primatySecondary,
+                  color: Styles.tertiary,
                   child: Container(
                     padding: EdgeInsets.symmetric(
                       horizontal: Utils.heightSize(context) * 0.02,
@@ -95,7 +96,7 @@ class _ProductFormScreenState extends State<ProductFormScreen> {
                     width: double.infinity,
                     height: MediaQuery.of(context).size.height * 0.95,
                     decoration: BoxDecoration(
-                      color: Styles.tertiary,
+                      color: Styles.quartenary,
                       borderRadius: const BorderRadius.only(
                         topLeft: Radius.circular(50),
                         topRight: Radius.circular(50),
@@ -176,7 +177,7 @@ class _ProductFormScreenState extends State<ProductFormScreen> {
                             DottedBorder(
                               borderType: BorderType.RRect,
                               radius: const Radius.circular(20),
-                              color: Colors.grey,
+                              color: Styles.primary,
                               dashPattern: const [
                                 2,
                               ],
@@ -209,7 +210,7 @@ class _ProductFormScreenState extends State<ProductFormScreen> {
                                   padding:
                                       const EdgeInsets.symmetric(vertical: 15),
                                   decoration: BoxDecoration(
-                                    color: Styles.tertiary,
+                                    color: Styles.quartenary,
                                     borderRadius: BorderRadius.circular(20),
                                   ),
                                   child: AppConditionalWidget(
@@ -222,23 +223,17 @@ class _ProductFormScreenState extends State<ProductFormScreen> {
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceEvenly,
                                       children: [
-                                        const Text(
+                                        Text(
                                           'Toque para adicionar a imagem do produto',
                                           textAlign: TextAlign.center,
                                           style: TextStyle(
-                                            color: Color.fromARGB(
-                                                255, 109, 109, 109),
+                                            color: Styles.tertiary,
                                           ),
                                         ),
                                         FaIcon(
                                           Icons.camera_alt_outlined,
                                           size: Utils.widthSize(context) * 0.08,
-                                          color: const Color.fromARGB(
-                                            255,
-                                            164,
-                                            164,
-                                            164,
-                                          ),
+                                          color: Styles.tertiary,
                                         ),
                                       ],
                                     ),

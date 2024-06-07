@@ -7,6 +7,7 @@ import 'package:my_store/src/modules/product/view/pages/product_loading_shimmer.
 import 'package:my_store/src/modules/product/view/pages/product_screen.dart';
 import 'package:my_store/src/modules/product/view/widgets/card_product_list.dart';
 import 'package:my_store/src/ui/appBar/appbar_simple.dart';
+import 'package:my_store/src/ui/buttons/app_action_appbar.dart';
 import 'package:my_store/src/ui/buttons/app_floating_action_button.dart';
 import 'package:my_store/src/ui/indicator/app_refresh_indicator.dart';
 import 'package:my_store/src/ui/informatives/app_conditional_widget.dart';
@@ -42,11 +43,11 @@ class _ProductsListScreenState extends State<ProductsListScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBarSimple(
-        title: 'Meus Produtos',
         action: [
-          IconButton(
-              onPressed: () => bloc.showSearchBox(),
-              icon: const Icon(Icons.search))
+          AppActionAppBar(
+            action: () => bloc.showSearchBox(),
+            icon: Icons.search,
+          ),
         ],
       ),
       body: BlocBuilder<ProductBloc, ProductState>(

@@ -119,17 +119,17 @@ class _AppTextFormFieldState extends State<AppTextFormField> {
         fillColor: Colors.transparent,
         counterText: '',
         labelStyle: TextStyle(
-          color: _isFocus ? Styles.primary : null,
+          color: Styles.primary,
         ),
-        hintStyle: const TextStyle(
-          color: Colors.grey,
+        hintStyle: TextStyle(
+          color: Styles.primary,
           fontWeight: FontWeight.normal,
         ),
         labelText: widget.label,
         contentPadding: const EdgeInsets.all(15),
         focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(
-            color: _isFocus ? Styles.primary : Colors.grey,
+            color: Styles.primary,
             width: 2,
           ),
           borderRadius: const BorderRadius.all(Radius.circular(20)),
@@ -141,11 +141,11 @@ class _AppTextFormFieldState extends State<AppTextFormField> {
           gapPadding: 25,
           borderRadius: BorderRadius.all(Radius.circular(20)),
         ),
-        enabledBorder: const OutlineInputBorder(
+        enabledBorder: OutlineInputBorder(
           borderSide: BorderSide(
-            color: Colors.grey,
+            color: Styles.primary,
           ),
-          borderRadius: BorderRadius.all(Radius.circular(20)),
+          borderRadius: const BorderRadius.all(Radius.circular(20)),
         ),
         isDense: true,
         errorMaxLines: 2,

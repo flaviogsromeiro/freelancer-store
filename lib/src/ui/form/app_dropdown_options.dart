@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 //
 import 'package:flutter/material.dart';
+import 'package:my_store/src/utils/style/styles.dart';
 
 class AppDropDownOptions extends StatefulWidget {
   const AppDropDownOptions({
@@ -32,7 +33,10 @@ class _AppDropDownOptionsState extends State<AppDropDownOptions> {
     return DropdownButtonFormField<String>(
       padding: EdgeInsets.zero,
       autovalidateMode: AutovalidateMode.onUserInteraction,
-      disabledHint: Text(widget.value ?? ''),
+      disabledHint: Text(
+        widget.value ?? '',
+        style: TextStyle(color: Styles.primary),
+      ),
       validator: widget.onValidator,
       onChanged: widget.onSelected,
       value: widget.value,
@@ -43,25 +47,25 @@ class _AppDropDownOptionsState extends State<AppDropDownOptions> {
       decoration: InputDecoration(
         labelText: widget.labelText,
         labelStyle: TextStyle(
-          color: !widget.enable ? Colors.grey : null,
+          color: Styles.primary,
         ),
         hintText: widget.hint,
-        hintStyle: const TextStyle(
-          color: Colors.black,
+        hintStyle: TextStyle(
+          color: Styles.primary,
           fontWeight: FontWeight.normal,
         ),
         border: const OutlineInputBorder(
           borderRadius: BorderRadius.all(Radius.circular(20)),
         ),
-        floatingLabelStyle: const TextStyle(color: Colors.grey),
+        floatingLabelStyle: TextStyle(color: Styles.primary),
         filled: true,
         fillColor: Colors.transparent,
         contentPadding: const EdgeInsets.all(15),
-        focusedBorder: const OutlineInputBorder(
+        focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(
-            color: Colors.grey,
+            color: Styles.primary,
           ),
-          borderRadius: BorderRadius.all(Radius.circular(20)),
+          borderRadius: const BorderRadius.all(Radius.circular(20)),
         ),
         errorBorder: const OutlineInputBorder(
           borderSide: BorderSide(
@@ -70,12 +74,12 @@ class _AppDropDownOptionsState extends State<AppDropDownOptions> {
           gapPadding: 25,
           borderRadius: BorderRadius.all(Radius.circular(20)),
         ),
-        enabledBorder: const OutlineInputBorder(
+        enabledBorder: OutlineInputBorder(
           borderSide: BorderSide(
-            color: Colors.grey,
+            color: Styles.primary,
           ),
           // gapPadding: 25,
-          borderRadius: BorderRadius.all(Radius.circular(20)),
+          borderRadius: const BorderRadius.all(Radius.circular(20)),
         ),
         errorMaxLines: 2,
       ),
