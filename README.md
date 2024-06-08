@@ -14,7 +14,7 @@
 <h2 id="demo">📱Demontração</h2>
 
 <p align="center">
-    <img src="assets/demo.gif" alt="Image Example" height="300px">
+    <img src="assets/demo.gif" alt="Image Example" height="400px">
 </p>
 
 <h2 id="tech">💻 Tecnologias</h2>
