@@ -1,16 +1,89 @@
-# my_store
+<h1 align="center" style="font-weight: bold;">Shop 📱</h1>
 
-A new Flutter project.
+<p align="center">
+ <a href="#demo">Demonstração</a> • 
+ <a href="#tech">Tecnologias</a> • 
+ <a href="#start">Iniciando</a> • 
+ <a href="#structure">Estrutura</a> 
+</p>
 
-## Getting Started
+<p align="center">
+    <b>O objetivo do aplicativo é desenvolver um sistema de gerenciamento de produtos que permita realizar as operações básicas de CRUD (Criar, Ler, Atualizar, Excluir).</b>
+</p>
 
-This project is a starting point for a Flutter application.
+<h2 id="demo">📱Demontração</h2>
 
-A few resources to get you started if this is your first Flutter project:
+<p align="center">
+    <img src="https://media.discordapp.net/attachments/1102358848750231604/1197630215355109416/onlydigital-signin_screen.png?ex=65bbf70e&is=65a9820e&hm=4495ab8d4dcb3a97a55e0c3bf742065ab6b19a18ceebf758d81b0268647056ea&=&format=webp&quality=lossless&width=241&height=468" alt="Image Example" height="400px">
+</p>
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+<h2 id="tech">💻 Tecnologias</h2>
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- Flutter 3.22.1
+- Dart 3.4.1
+- SQLite
+
+<h2 id="start">🎖️ Iniciando</h2>
+
+Para começar o projeto, certifique-se de ter o Dart e o Flutter configurados em sua máquina local.
+
+1. **Navega para o projeto**:
+    ```bash
+    cd <project name>
+    ```
+2. **Limpe o cache**:
+    ```bash
+    flutter clean
+    ```
+3. **Instale as dependências**:
+    ```bash
+    flutter pub get
+    ```
+4. **Inicie o projeto**:
+    ```bash
+    flutter run --flavor dev
+    ```
+
+
+<h2 id="structure">📂 Estrutura </h2>
+
+```
+src/
+ ├── assets/
+ │   └── images
+ │   └── fonts
+ │   
+ ├── lib/
+ │   ├── core/
+ │   │   ├── database/
+ │   │   ├── di
+ │   │   ├── extensions/
+ │   │   └── mixin/
+ │   │    
+ │   ├── ini/
+ │   │   ├── app.dart
+ │   │   └── splash.dart
+ │   │   
+ │   ├── modules/
+ │   │   └── product/
+ │   │       ├── controller/
+ │   │       ├── model/
+ │   │       └── view/
+ │   │       
+ │   └── ui/
+ │       ├── appBar/
+ │       ├── buttons/
+ │       ├── dialogs/
+ │       ├── form/
+ │       ├── indicator/
+ │       ├── informatives/
+ │       ├── shimmer/
+ │       └── utils/
+ │           ├── style/
+ │           │   ├── images_network_path.dart
+ │           │   └── utils.dart
+ │           │   
+ │           └── validator.dart
+ │          
+ └── main.dart
+```
