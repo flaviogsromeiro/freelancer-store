@@ -228,6 +228,7 @@ class _ProductFormScreenState extends State<ProductFormScreen> {
                                           textAlign: TextAlign.center,
                                           style: TextStyle(
                                             color: Styles.tertiary,
+                                            fontSize: 15,
                                           ),
                                         ),
                                         FaIcon(

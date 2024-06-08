@@ -17,7 +17,7 @@ class _SplashState extends State<Splash> {
         body: AnimatedSplashScreen(
       backgroundColor: Styles.quartenary,
       splashTransition: SplashTransition.sizeTransition,
-      splash: 'assets/logo-principal.png',
+      splash: 'assets/images/logo-principal.png',
       duration: 3000,
       splashIconSize: 150,
       nextScreen: const ProductsListScreen(),

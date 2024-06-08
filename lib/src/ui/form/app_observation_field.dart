@@ -51,6 +51,7 @@ class _AppObservationFieldState extends State<AppObservationField> {
       height: Utils.widthSize(context) * 0.25,
       width: double.infinity,
       child: TextFormField(
+        onTapOutside: (_) => FocusScope.of(context).unfocus(),
         textCapitalization: TextCapitalization.sentences,
         scrollPadding: const EdgeInsets.only(bottom: 200),
         cursorColor: Styles.primary,
@@ -62,7 +63,8 @@ class _AppObservationFieldState extends State<AppObservationField> {
         onEditingComplete: () => widget.action(_controller.text),
         maxLines: 4,
         decoration: InputDecoration(
-          errorStyle: const TextStyle(fontSize: 12, height: 0.3),
+          errorStyle: const TextStyle(
+              fontFamily: Styles.itimFont, fontSize: 12, height: 0.3),
           counterText: '',
           border: const OutlineInputBorder(
             borderRadius: BorderRadius.all(Radius.circular(20)),
@@ -71,6 +73,8 @@ class _AppObservationFieldState extends State<AppObservationField> {
           fillColor: Colors.transparent,
           labelStyle: TextStyle(
             color: Styles.primary,
+            fontFamily: Styles.itimFont,
+            fontSize: 18,
           ),
           labelText: 'Descrição',
           contentPadding: const EdgeInsets.all(15),

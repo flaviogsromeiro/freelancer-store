@@ -6,8 +6,8 @@ import 'package:my_store/src/ui/appBar/appbar_simple.dart';
 import 'package:my_store/src/utils/style/styles.dart';
 import 'package:my_store/src/utils/utils.dart';
 
-class ProductScreen extends StatelessWidget {
-  const ProductScreen({
+class ProductDetailsScreen extends StatelessWidget {
+  const ProductDetailsScreen({
     super.key,
     required this.model,
   });

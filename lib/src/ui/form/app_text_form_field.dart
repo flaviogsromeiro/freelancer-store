@@ -97,6 +97,7 @@ class _AppTextFormFieldState extends State<AppTextFormField> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      onTapOutside: (_) => FocusScope.of(context).unfocus(),
       textCapitalization: TextCapitalization.sentences,
       scrollPadding: const EdgeInsets.only(bottom: 200),
       enabled: widget.enable ?? true,
@@ -111,7 +112,11 @@ class _AppTextFormFieldState extends State<AppTextFormField> {
       validator: widget.onValidator,
       decoration: InputDecoration(
         hintText: widget.hintText,
-        errorStyle: const TextStyle(fontSize: 12, height: 0.3),
+        errorStyle: const TextStyle(
+          fontFamily: Styles.itimFont,
+          fontSize: 12,
+          height: 0.3,
+        ),
         border: const OutlineInputBorder(
           borderRadius: BorderRadius.all(Radius.circular(20)),
         ),
@@ -119,9 +124,9 @@ class _AppTextFormFieldState extends State<AppTextFormField> {
         fillColor: Colors.transparent,
         counterText: '',
         labelStyle: TextStyle(
-          color: Styles.primary,
-        ),
+            color: Styles.primary,fontFamily: Styles.itimFont,  fontSize: 18,),
         hintStyle: TextStyle(
+          fontFamily: Styles.itimFont,
           color: Styles.primary,
           fontWeight: FontWeight.normal,
         ),

@@ -35,29 +35,39 @@ class _AppDropDownOptionsState extends State<AppDropDownOptions> {
       autovalidateMode: AutovalidateMode.onUserInteraction,
       disabledHint: Text(
         widget.value ?? '',
-        style: TextStyle(color: Styles.primary),
+        style: TextStyle(fontFamily: Styles.itimFont, color: Styles.primary),
       ),
       validator: widget.onValidator,
       onChanged: widget.onSelected,
       value: widget.value,
       dropdownColor: Colors.white,
       style: TextStyle(
+        fontFamily: Styles.itimFont,
+        fontSize: 18,
         color: widget.enable ? Colors.black : Colors.grey,
       ),
       decoration: InputDecoration(
         labelText: widget.labelText,
         labelStyle: TextStyle(
+          fontFamily: Styles.itimFont,
+          fontSize: 18,
           color: Styles.primary,
         ),
         hintText: widget.hint,
         hintStyle: TextStyle(
+          fontFamily: Styles.itimFont,
+          fontSize: 18,
           color: Styles.primary,
           fontWeight: FontWeight.normal,
         ),
         border: const OutlineInputBorder(
           borderRadius: BorderRadius.all(Radius.circular(20)),
         ),
-        floatingLabelStyle: TextStyle(color: Styles.primary),
+        floatingLabelStyle: TextStyle(
+          fontFamily: Styles.itimFont,
+          fontSize: 18,
+          color: Styles.primary,
+        ),
         filled: true,
         fillColor: Colors.transparent,
         contentPadding: const EdgeInsets.all(15),

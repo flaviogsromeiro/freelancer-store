@@ -26,6 +26,7 @@ class AppBarSimple extends StatelessWidget implements PreferredSizeWidget {
       leadingWidth: 65,
       elevation: 0,
       centerTitle: true,
+      leading: leading,
       shape: const OutlineInputBorder(
         borderSide: BorderSide.none,
         borderRadius: BorderRadius.only(
@@ -35,12 +36,12 @@ class AppBarSimple extends StatelessWidget implements PreferredSizeWidget {
       ),
       title: title.isNull()
           ? Image.asset(
-              'assets/logo-extends.png',
+              'assets/images/logo-extends.png',
               scale: 4,
             )
           : Text(
               title!,
-              style: TextStyle(color: Styles.secondary),
+              style: Styles.titleAppBarStyle,
             ),
       actions: action,
       iconTheme: IconThemeData(color: Styles.primary),

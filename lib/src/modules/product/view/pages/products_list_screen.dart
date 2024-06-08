@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_store/src/modules/product/view/bloc/list/product_bloc.dart';
 import 'package:my_store/src/modules/product/view/bloc/list/product_state.dart';
+import 'package:my_store/src/modules/product/view/pages/product_details_screen.dart';
 import 'package:my_store/src/modules/product/view/pages/product_form_screen.dart';
 import 'package:my_store/src/modules/product/view/pages/product_loading_shimmer.dart';
-import 'package:my_store/src/modules/product/view/pages/product_screen.dart';
 import 'package:my_store/src/modules/product/view/widgets/card_product_list.dart';
 import 'package:my_store/src/ui/appBar/appbar_simple.dart';
 import 'package:my_store/src/ui/buttons/app_action_appbar.dart';
@@ -43,6 +43,7 @@ class _ProductsListScreenState extends State<ProductsListScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBarSimple(
+        leading: const SizedBox.shrink(),
         action: [
           AppActionAppBar(
             action: () => bloc.showSearchBox(),
@@ -134,7 +135,7 @@ class _ProductsListScreenState extends State<ProductsListScreen> {
                           return GestureDetector(
                             onTap: () => Navigator.of(context)
                                 .push(MaterialPageRoute(
-                                    builder: (context) => ProductScreen(
+                                    builder: (context) => ProductDetailsScreen(
                                         model: state
                                             .listOfProductFiltered[index])))
                                 .then((value) {
