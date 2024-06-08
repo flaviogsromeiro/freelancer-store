@@ -14,7 +14,7 @@
 <h2 id="demo">📱Demontração</h2>
 
 <p align="center">
-    <img src="https://media.discordapp.net/attachments/1102358848750231604/1197630215355109416/onlydigital-signin_screen.png?ex=65bbf70e&is=65a9820e&hm=4495ab8d4dcb3a97a55e0c3bf742065ab6b19a18ceebf758d81b0268647056ea&=&format=webp&quality=lossless&width=241&height=468" alt="Image Example" height="400px">
+    <img src="assets/demo.gif" alt="Image Example" height="300px">
 </p>
 
 <h2 id="tech">💻 Tecnologias</h2>
